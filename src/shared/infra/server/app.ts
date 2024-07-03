@@ -10,7 +10,14 @@ import path from "path";
 import environment from "@config/environment";
 
 const app = express();
+
 app.use(express.json());
+
+app.use(
+  `${environment.STORAGE_PATH}`,
+  express.static(environment.STORAGE_PATH)
+);
+
 app.use(router);
 
 // Middleware de Erro
@@ -18,22 +25,6 @@ app.use(catchErrors);
 
 // Conectando com o banco de dados
 connectDatabase();
-
-// Multer
-const defaultMainPath = path.join(
-  __dirname,
-  "..",
-  "..",
-  "..",
-  "..",
-  "..",
-  environment.STORAGE_PATH
-);
-
-app.use(
-  `${environment.STORAGE_PATH}`,
-  express.static(path.join(defaultMainPath))
-);
 
 // Rota para acessar a documentação online da API
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));

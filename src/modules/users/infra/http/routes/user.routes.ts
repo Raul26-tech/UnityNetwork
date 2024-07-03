@@ -1,13 +1,20 @@
 import { Router } from "express";
+import multer from "multer";
 import { CreateUserController } from "../controllers/CreateUserController";
 import { ListUsersController } from "../controllers/ListUsersController";
 import { isAuthenticated } from "../../../../../shared/infra/http/middlewares/IsAuthenticated";
+import upload from "@utils/files";
+import { UploadPictureController } from "../controllers/UploadPictureController";
+import { UpdateUserController } from "../controllers/UpodateUserController";
 
 const userRoutes = Router();
+const uploadFile = multer(upload.upload("./tmp"));
 
 // Controllers
 const createUserController = new CreateUserController();
 const listUserController = new ListUsersController();
+const uploadPictureController = new UploadPictureController();
+const updateUserController = new UpdateUserController();
 
 /**
  * @swagger
@@ -58,5 +65,16 @@ userRoutes.post("/first-access", createUserController.handle);
 //  *                     type: string
 //  */
 userRoutes.get("/", isAuthenticated, listUserController.handle);
+
+// Rota para upload da imagem em que o usuário irá usar para o avatar
+userRoutes.post(
+  "/picture",
+  uploadFile.single("avatar"),
+  isAuthenticated,
+  uploadPictureController.handle
+);
+
+// Atualizando o usuário
+userRoutes.patch("/:id", isAuthenticated, updateUserController.handle);
 
 export { userRoutes };

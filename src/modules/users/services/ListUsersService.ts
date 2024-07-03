@@ -5,11 +5,11 @@ import { UserRepository } from "../infra/typeorm/repositories/UserRepository";
 class ListUsersService {
   constructor(
     @inject("UserRepository")
-    private _userRepsitory: UserRepository
+    private _userRepository: UserRepository
   ) {}
 
   async execute() {
-    return await this._userRepsitory.listUsers();
+    return await this._userRepository.listUsers();
   }
 }
 
