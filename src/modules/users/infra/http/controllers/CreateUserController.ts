@@ -12,7 +12,6 @@ class CreateUserController {
       gender,
       status,
       type,
-      avatar,
       cellPhone,
       phone,
       postalCode,
@@ -23,6 +22,11 @@ class CreateUserController {
       city,
       state,
     } = request.body;
+
+    // const avatarPath = request.file ? request.file.path : null;
+
+    // console.log("AvatarPath: ", avatarPath);
+
     const createUserService = container.resolve(CreateUSerService);
 
     const user = await createUserService.excute({
@@ -33,7 +37,6 @@ class CreateUserController {
       passwordConfirm,
       status,
       type,
-      avatar,
       cellPhone,
       phone,
       postalCode,

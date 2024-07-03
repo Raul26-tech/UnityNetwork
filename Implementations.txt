@@ -5,3 +5,7 @@
  [] - Criar schemas para validar a entrada de dados
  [] - Criar rotina de testes para a aplicação:
         - Há princípio criar o teste de altenticação
+
+[] - upload de imagem
+       - Devera conter uma arquivo onde podemos ter diversas funções ou mêtodos
+       - Deverá ter uma rota para realizar o upload

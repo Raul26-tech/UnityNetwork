@@ -3,6 +3,7 @@ import { User } from "../entities/User";
 import { ICreateUserDTO } from "../../../dto/ICreateUserDTO";
 import { BaseRepository } from "@shared/infra/typeorm/repositories/BaseRepository";
 import { injectable } from "inversify";
+import { IUpdateUserDTO } from "@modules/users/dto/IUpdateUserDTO";
 
 @injectable()
 class UserRepository extends BaseRepository {
@@ -69,6 +70,49 @@ class UserRepository extends BaseRepository {
     });
 
     return user;
+  }
+
+  async update({
+    id,
+    name,
+    email,
+    password,
+    type,
+    gender,
+    postalCode,
+    street,
+    number,
+    district,
+    state,
+    complement,
+    city,
+    cellPhone,
+    phone,
+    status,
+  }: IUpdateUserDTO) {
+    const user = await this._repository.findOne({ where: { id } });
+
+    user.name = name;
+    user.email = email;
+    (user.password = password), (user.gender = gender);
+    user.postalCode = postalCode;
+    user.status = status;
+    user.type = type;
+    user.cellPhone = cellPhone;
+    user.phone = phone;
+
+    // Address
+    user.postalCode = postalCode;
+    user.street = street;
+    user.number = number;
+    user.complement = complement;
+    user.district = district;
+    user.city = city;
+    user.state = state;
+
+    const userUpdated = await this._repository.save(user);
+
+    return userUpdated;
   }
 
   async listUsers() {
