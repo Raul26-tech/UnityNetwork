@@ -72,32 +72,39 @@ class UserRepository extends BaseRepository {
     return user;
   }
 
-  async update({
-    id,
-    name,
-    email,
-    password,
-    type,
-    gender,
-    postalCode,
-    street,
-    number,
-    district,
-    state,
-    complement,
-    city,
-    cellPhone,
-    phone,
-    status,
-  }: IUpdateUserDTO) {
+  async update(
+    id: string,
+    {
+      name,
+      email,
+      password,
+      type,
+      gender,
+      avatar,
+      postalCode,
+      street,
+      number,
+      district,
+      state,
+      complement,
+      city,
+      cellPhone,
+      phone,
+      status,
+    }: IUpdateUserDTO
+  ) {
     const user = await this._repository.findOne({ where: { id } });
 
+    user.createdAt = user.createdAt;
+    user.updatedAt = user.updatedAt;
     user.name = name;
     user.email = email;
-    (user.password = password), (user.gender = gender);
+    user.password = password;
+    user.gender = gender;
     user.postalCode = postalCode;
     user.status = status;
     user.type = type;
+    user.avatar = avatar;
     user.cellPhone = cellPhone;
     user.phone = phone;
 

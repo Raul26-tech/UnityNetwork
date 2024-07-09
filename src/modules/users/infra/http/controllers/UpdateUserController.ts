@@ -4,8 +4,6 @@ import { Request, Response } from "express";
 
 class UpdateUserController {
   async handle(request: Request, response: Response) {
-    const updateUserService = container.resolve(UpdateUserService);
-
     const { id } = request.params;
     const {
       name,
@@ -13,6 +11,7 @@ class UpdateUserController {
       password,
       type,
       gender,
+      avatar,
       postalCode,
       street,
       number,
@@ -25,13 +24,16 @@ class UpdateUserController {
       status,
     } = request.body;
 
-    const updatedUser = await updateUserService.execute({
+    const updateUserService = container.resolve(UpdateUserService);
+
+    const updatedUser = await updateUserService.execute(id, {
       id,
       name,
       email,
       password,
       type,
       gender,
+      avatar,
       postalCode,
       street,
       number,

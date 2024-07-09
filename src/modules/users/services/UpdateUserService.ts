@@ -1,7 +1,8 @@
 import { inject, injectable } from "inversify";
 import { UserRepository } from "../infra/typeorm/repositories/UserRepository";
 import { IUpdateUserDTO } from "../dto/IUpdateUserDTO";
-import { AppError } from "@shared/errors/AppError";
+import { NotFound } from "@shared/errors/NotFound";
+import { BadRequest } from "@shared/errors/BadRequest";
 
 @injectable()
 class UpdateUserService {
@@ -10,40 +11,51 @@ class UpdateUserService {
     private _userRepository: UserRepository
   ) {}
 
-  async execute({
-    id,
-    name,
-    email,
-    password,
-    type,
-    gender,
-    postalCode,
-    street,
-    number,
-    district,
-    state,
-    complement,
-    city,
-    cellPhone,
-    phone,
-    status,
-  }: IUpdateUserDTO) {
-    const userExists = await this._userRepository.findByEmail(email);
+  async execute(
+    id: string,
+    {
+      name,
+      email,
+      password,
+      type,
+      gender,
+      avatar,
+      postalCode,
+      street,
+      number,
+      district,
+      state,
+      complement,
+      city,
+      cellPhone,
+      phone,
+      status,
+    }: IUpdateUserDTO
+  ) {
+    const user = await this._userRepository.findById(id);
 
-    if (!userExists) {
-      throw new AppError("Nenhum usuário foi encontrado com esse e-mail!");
+    if (!user) {
+      throw new NotFound("Nenhum usuário foi encontrado com esse e-mail!");
     }
 
-    if (userExists.status === "pending") {
-      throw new AppError(
-        `Usuários com status ${userExists.status} não podem ser alterados, stive seu usuário e tente novamente`
+    if (user.status === "inactive" || user.status === "pending") {
+      throw new BadRequest(
+        `Usuários com status ${user.status} não podem ser alterados.`
       );
     }
 
-    const updatedUser = await this._userRepository.update({
-      id,
+    if (user.avatar) {
+      const verifyExtensions = user.avatar.split("/");
+
+      console.log("Extensão: ", verifyExtensions);
+    }
+
+    console.log(user.avatar);
+
+    const updatedUser = await this._userRepository.update(id, {
       name,
       email,
+      avatar,
       password,
       type,
       gender,
