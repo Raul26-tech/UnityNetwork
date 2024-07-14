@@ -44,6 +44,7 @@ class UpdateUserService {
       );
     }
 
+
     if (user.avatar) {
       const verifyExtensions = user.avatar.split("/");
 
