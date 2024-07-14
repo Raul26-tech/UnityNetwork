@@ -47,7 +47,7 @@ class UpdateUserService {
     if (user.avatar) {
       const verifyExtensions = user.avatar.split("/");
 
-      console.log("Extensão: ", verifyExtensions);
+      console.log("Extensão Aqui: ", verifyExtensions);
     }
 
     console.log(user.avatar);
