@@ -40,6 +40,8 @@ class UpdateUserService {
       );
     }
 
+    console.log("Aqui");
+
     const updatedUser = await this._userRepository.update({
       id,
       name,
