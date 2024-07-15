@@ -5,7 +5,7 @@ import { ListUsersController } from "../controllers/ListUsersController";
 import { isAuthenticated } from "../../../../../shared/infra/http/middlewares/IsAuthenticated";
 import upload from "@utils/files";
 import { UploadPictureController } from "../controllers/UploadPictureController";
-import { UpdateUserController } from "../controllers/UpodateUserController";
+import { UpdateUserController } from "../controllers/UpdateUserController";
 
 const userRoutes = Router();
 const uploadFile = multer(upload.upload("./tmp"));

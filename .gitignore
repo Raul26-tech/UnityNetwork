@@ -4,9 +4,11 @@
 
 # Diretories
 **/node_modules
+tmp/**
 
 
 # Custom
-Implementations.txt
+**.txt
 **/postgres-data
+\!implementations.tsx
 dist
