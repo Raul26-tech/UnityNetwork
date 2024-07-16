@@ -127,6 +127,12 @@ class UserRepository extends BaseRepository {
 
     return users;
   }
+
+  async ListUser(id: string) {
+    const user = await this._repository.findOne({ where: { id } });
+
+    return user;
+  }
 }
 
 export { UserRepository };

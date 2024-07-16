@@ -23,10 +23,6 @@ class CreateUserController {
       state,
     } = request.body;
 
-    // const avatarPath = request.file ? request.file.path : null;
-
-    // console.log("AvatarPath: ", avatarPath);
-
     const createUserService = container.resolve(CreateUSerService);
 
     const user = await createUserService.excute({

@@ -3,6 +3,7 @@ import { UserRepository } from "../infra/typeorm/repositories/UserRepository";
 import { IUpdateUserDTO } from "../dto/IUpdateUserDTO";
 import { NotFound } from "@shared/errors/NotFound";
 import { BadRequest } from "@shared/errors/BadRequest";
+import { ForBidden } from "@shared/errors/Forbidden";
 
 @injectable()
 class UpdateUserService {
@@ -33,6 +34,7 @@ class UpdateUserService {
     }: IUpdateUserDTO
   ) {
     const user = await this._userRepository.findById(id);
+    let picture = avatar;
 
     if (!user) {
       throw new NotFound("Nenhum usuário foi encontrado com esse e-mail!");
@@ -44,19 +46,26 @@ class UpdateUserService {
       );
     }
 
+    if (picture) {
+      const data = picture.split(".");
+      const extensionName = data[data.length - 1];
+      const permittedExtensions = ["jpg", "png", "jpeg", "svg"];
 
-    if (user.avatar) {
-      const verifyExtensions = user.avatar.split("/");
+      console.log({ data, extensionName, permittedExtensions });
 
-      console.log("Extensão Aqui: ", verifyExtensions);
+      if (permittedExtensions.indexOf(extensionName) === -1) {
+        throw new ForBidden(
+          `Arquivo no formato ${extensionName} é inválido. Somente arquivos com as extensões ${permittedExtensions} são válidos`
+        );
+      }
+
+      console.log(data[data.length - 1]);
     }
-
-    console.log(user.avatar);
 
     const updatedUser = await this._userRepository.update(id, {
       name,
       email,
-      avatar,
+      avatar: picture,
       password,
       type,
       gender,
