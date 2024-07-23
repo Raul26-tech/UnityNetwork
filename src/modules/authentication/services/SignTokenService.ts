@@ -15,7 +15,7 @@ class SignTokenService {
 
   async execute({ email, userId }: SignTokenServiceDTO) {
     // Gerando token
-    const accesToken = sign({}, auth.auth_secret_token, {
+    const accessToken = sign({}, auth.auth_secret_token, {
       subject: userId,
       expiresIn: `${auth.auth_expired_token}d`,
     });
@@ -51,7 +51,7 @@ class SignTokenService {
     });
 
     return {
-      accesToken,
+      accessToken,
       refreshToken,
     };
   }

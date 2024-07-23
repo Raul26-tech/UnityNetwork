@@ -51,15 +51,11 @@ class UpdateUserService {
       const extensionName = data[data.length - 1];
       const permittedExtensions = ["jpg", "png", "jpeg", "svg"];
 
-      console.log({ data, extensionName, permittedExtensions });
-
       if (permittedExtensions.indexOf(extensionName) === -1) {
         throw new ForBidden(
           `Arquivo no formato ${extensionName} é inválido. Somente arquivos com as extensões ${permittedExtensions} são válidos`
         );
       }
-
-      console.log(data[data.length - 1]);
     }
 
     const updatedUser = await this._userRepository.update(id, {
