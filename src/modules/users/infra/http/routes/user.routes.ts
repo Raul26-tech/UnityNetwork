@@ -6,13 +6,15 @@ import { isAuthenticated } from "../../../../../shared/infra/http/middlewares/Is
 import upload from "@utils/files";
 import { UploadPictureController } from "../controllers/UploadPictureController";
 import { UpdateUserController } from "../controllers/UpdateUserController";
+import { ListUserController } from "../controllers/ListUserController";
 
 const userRoutes = Router();
 const uploadFile = multer(upload.upload("./tmp"));
 
 // Controllers
 const createUserController = new CreateUserController();
-const listUserController = new ListUsersController();
+const listUsersController = new ListUsersController();
+const listUserController = new ListUserController();
 const uploadPictureController = new UploadPictureController();
 const updateUserController = new UpdateUserController();
 
@@ -64,7 +66,12 @@ userRoutes.post("/first-access", createUserController.handle);
 //  *                   username:
 //  *                     type: string
 //  */
-userRoutes.get("/", isAuthenticated, listUserController.handle);
+
+// Listando todos os usuários
+userRoutes.get("/", isAuthenticated, listUsersController.handle);
+
+// Listando usuário específico pelo Id
+userRoutes.get("/:id", isAuthenticated, listUserController.handle);
 
 // Rota para upload da imagem em que o usuário irá usar para o avatar
 userRoutes.post(
