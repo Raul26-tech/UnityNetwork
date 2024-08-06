@@ -1,4 +1,6 @@
 import { User } from "@modules/users/infra/typeorm/entities/User";
+import { Post } from "@modules/posts/infra/typeorm/entities/Post";
+
 import { randomUUID } from "crypto";
 import {
   Entity,
@@ -10,8 +12,8 @@ import {
   ManyToOne,
 } from "typeorm";
 
-@Entity("posts")
-class Post {
+@Entity("likes")
+class Likes {
   constructor() {
     this.id = randomUUID();
   }
@@ -31,22 +33,15 @@ class Post {
   @Column({ name: "updated_by", type: "varchar" })
   updatedBy: string;
 
-  @Column({ type: "varchar", length: "500" })
-  title: string;
-
-  @Column({ type: "varchar" })
-  content: string;
-
-  @Column({ name: "like_count", type: "float" })
-  likeCount: number;
-
-  @Column({ name: "comment_count", type: "float" })
-  commentCount: number;
-
   @Column({ name: "user_id", type: "uuid" })
   @ManyToOne(() => User)
   @JoinColumn({ name: "user_id" })
   userId: string;
+
+  @Column({ name: "post_id", type: "uuid" })
+  @ManyToOne(() => Post)
+  @JoinColumn({ name: "post_id" })
+  postId: string;
 }
 
-export { Post };
+export { Likes };

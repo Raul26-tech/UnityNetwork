@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePosts1721780539539 implements MigrationInterface {
+export class CreateLikePost1722986013711 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "posts",
+        name: "likes",
         columns: [
           {
             name: "id",
@@ -33,23 +33,8 @@ export class CreatePosts1721780539539 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: "title",
-            type: "varchar",
-            isNullable: true,
-          },
-          {
-            name: "content",
-            type: "varchar",
-            isNullable: true,
-          },
-          {
-            name: "like_count",
-            type: "float",
-            isNullable: true,
-          },
-          {
-            name: "comment_count",
-            type: "float",
+            name: "post_id",
+            type: "uuid",
             isNullable: true,
           },
           {
@@ -59,6 +44,14 @@ export class CreatePosts1721780539539 implements MigrationInterface {
           },
         ],
         foreignKeys: [
+          {
+            name: "FKPostLike",
+            referencedTableName: "posts",
+            referencedColumnNames: ["id"],
+            columnNames: ["post_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+          },
           {
             name: "FKUserPost",
             referencedTableName: "users",
@@ -73,6 +66,6 @@ export class CreatePosts1721780539539 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("posts");
+    await queryRunner.dropTable("likes");
   }
 }
