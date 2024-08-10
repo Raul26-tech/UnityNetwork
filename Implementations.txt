@@ -6,6 +6,19 @@
  [] - Criar rotina de testes para a aplicação:
         - Há princípio criar o teste de altenticação
 
-[] - upload de imagem
+[*] - upload de imagem
        - Devera conter uma arquivo onde podemos ter diversas funções ou mêtodos
        - Deverá ter uma rota para realizar o upload
+
+
+[*] - Criação da entidades de Posts, Comentarios e Likes
+       - Criar Tabela de Posts
+       - Criar Tabela de Comentarios
+       - Criar Tabela de Likes       
+
+[] - Criar serviço de criação de Posts
+       - O usuário poderá criar posts, dar likes e comentar nos posts
+              - O Comentario há principio será somente uma texto, há Implementação
+              de imagens será feita posteriormente
+
+       
