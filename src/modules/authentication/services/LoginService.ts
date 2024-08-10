@@ -33,13 +33,13 @@ class LoginService {
     // Assinando o token e um refresh token
     const signTokenService = container.resolve(SignTokenService);
 
-    const { accesToken, refreshToken } = await signTokenService.execute({
+    const { accessToken, refreshToken } = await signTokenService.execute({
       userId: user.id,
       email: user.email,
     });
 
     return {
-      accesToken,
+      accessToken,
       refreshToken,
       user: {
         id: user.id,

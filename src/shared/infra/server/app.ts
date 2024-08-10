@@ -25,8 +25,7 @@ connectDatabase();
 // Rota padrão do sistema
 app.use("/", (request, response) => {
   return response.status(200).send({
-    message:
-      "Seja Bem-vindo(a) ao Unity Network, espero que goste da experiência de nossa rede e que você possa fazer muitos amigos!",
+    message: "Seja Bem-vindo(a) ao Unity Network",
   });
 });
 

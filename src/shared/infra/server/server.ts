@@ -8,5 +8,5 @@ app.listen(port, () => {
 
 app.on("error", (error) => {
   console.log("\n\n   FAILURE AN UNEXPECTED ERROR OCCURRED  \n\n");
-  console.log("O Erro é este: ", error);
+  console.log("Erro: ", error);
 });

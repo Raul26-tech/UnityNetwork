@@ -10,5 +10,5 @@ tmp/**
 # Custom
 **.txt
 **/postgres-data
-\!implementations.tsx
+implementations.txt
 dist
