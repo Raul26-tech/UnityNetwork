@@ -22,15 +22,15 @@ app.use(router);
 // Conectando com o banco de dados
 connectDatabase();
 
+// Rota para acessar a documentação online da API
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 // Rota padrão do sistema
 app.use("/", (request, response) => {
   return response.status(200).send({
     message: "Seja Bem-vindo(a) ao Unity Network",
   });
 });
-
-// Rota para acessar a documentação online da API
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Middleware de Erros da aplicação
 app.use(catchErrors);
