@@ -19,6 +19,7 @@
 [] - Criar serviço de criação de Posts
        - O usuário poderá criar posts, dar likes e comentar nos posts
               - O Comentario há principio será somente um texto, há Implementação
-              de imagens será feita posteriormente
+              de imagens será feita posteriormente,
+              - As imagens do post deveram estar em uma tabela diferente
 
        

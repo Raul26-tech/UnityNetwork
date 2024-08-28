@@ -17,6 +17,8 @@ class PostRepository extends BaseRepository {
     const post = this._repository.create({
       title,
       content,
+      commentCount: 0,
+      likeCount: 0,
     });
 
     await this._repository.save(post);

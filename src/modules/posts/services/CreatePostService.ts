@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
 import { PostRepository } from "../infra/typeorm/repositories/PostRepository";
 import { ICreatePostDTO } from "../dto/ICreatePost";
-import { BadRequest } from "@shared/errors/BadRequest";
 import { CreatePostSchema } from "../schemas/CreatePostSchema";
 
 @injectable()
