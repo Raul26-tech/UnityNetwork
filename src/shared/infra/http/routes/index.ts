@@ -2,6 +2,7 @@ import { Router } from "express";
 import { userRoutes } from "../../../../modules/users/infra/http/routes/user.routes";
 import { authenticateUserRouter } from "../../../../modules/authentication/infra/http/routes/auth.routes";
 import { postRoutes } from "@modules/posts/infra/http/routes/post.routes";
+import { imageRoutes } from "@modules/images/infra/http/routes/images.routes";
 
 const router = Router();
 
@@ -40,5 +41,6 @@ router.use("/", authenticateUserRouter);
  */
 router.use("/users", userRoutes);
 router.use("/posts", postRoutes);
+router.use("/", imageRoutes);
 
 export { router };

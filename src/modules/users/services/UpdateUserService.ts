@@ -6,7 +6,7 @@ import { BadRequest } from "@shared/errors/BadRequest";
 import { ForBidden } from "@shared/errors/Forbidden";
 
 @injectable()
-class UpdateUserService {
+export class UpdateUserService {
   constructor(
     @inject("UserRepository")
     private _userRepository: UserRepository
@@ -80,5 +80,3 @@ class UpdateUserService {
     return updatedUser;
   }
 }
-
-export { UpdateUserService };

@@ -16,4 +16,17 @@ export default {
       }),
     };
   },
+
+  // uploadManyImage(path: string) {
+  //   return {
+  //     Storage: multer.diskStorage({
+  //       destination: path,
+  //       filename: (_, file, callback) => {
+  //         const fileName = `${fileId}-${file.originalname}`;
+
+  //         return callback(null, fileName);
+  //       },
+  //     }),
+  //   };
+  // },
 };

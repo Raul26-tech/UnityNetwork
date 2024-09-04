@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { PostRepository } from "../infra/typeorm/repositories/PostRepository";
-import { ICreatePostDTO } from "../dto/ICreatePost";
 import { CreatePostSchema } from "../schemas/CreatePostSchema";
+import { createPostDTO } from "../dto/create-post.dto";
 
 @injectable()
 class CreatePostService {
@@ -10,7 +10,7 @@ class CreatePostService {
     private _postRepository: PostRepository
   ) {}
 
-  async execute({ title, content }: ICreatePostDTO) {
+  async execute({ title, content }: createPostDTO) {
     // Validando as entradas
     CreatePostSchema.parse({ title, content });
 
